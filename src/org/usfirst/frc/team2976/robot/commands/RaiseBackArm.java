@@ -21,11 +21,11 @@ public class RaiseBackArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(OI.otherStick.getRawButton(OI.Button.A.getBtnNumber())){
+    	if(OI.otherStick.getRawButton(OI.Button.X.getBtnNumber())){
     		raiseArmSolenoid.raiseHookMechanism.set(true);
+    	} else if(OI.driveStick.getRawButton(OI.Button.Y.getBtnNumber()))	{
+    		raiseArmSolenoid.raiseHookMechanism.set(false);
     	}
-    	
-   
     }
 
     // Make this return true when this Command no longer needs to run execute()

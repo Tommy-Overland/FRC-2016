@@ -8,7 +8,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2976.robot.commands.ArcadeBot;
 import org.usfirst.frc.team2976.robot.commands.ArmDynamicSetpointPID;
+import org.usfirst.frc.team2976.robot.commands.DriveBOT;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2976.robot.commands.RaiseBackArm;
+import org.usfirst.frc.team2976.robot.commands.RaiseHook;
+import org.usfirst.frc.team2976.robot.commands.RaiseRobot;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2976.robot.commands.RunRoller;
@@ -29,6 +33,10 @@ public class Robot extends IterativeRobot {
 	public static final ArcadeBot ArcadeBOT = new ArcadeBot();
 	public static final TankBot TankBOT = new TankBot(); //Do not start both BOTS in a single program
 	public static final ArmDynamicSetpointPID armPID = new ArmDynamicSetpointPID();
+	public static final RaiseRobot raiseRobot = new RaiseRobot();
+	public static final RaiseHook raiseHook = new RaiseHook();
+	public static final DriveBOT DriveBot = new DriveBOT();
+	public static final RaiseBackArm raiseBackArm = new RaiseBackArm();
 	//Drive Commands are exclusive
 
 	public static OI oi;
@@ -70,8 +78,12 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
          //ArcadeBOT.start();
-        armPID.start();
+        //armPID.start();
         //TankBOT.start();
+        DriveBot.start();
+        raiseHook.start();
+        raiseRobot.start();
+        raiseBackArm.start();
     }
 
     /**

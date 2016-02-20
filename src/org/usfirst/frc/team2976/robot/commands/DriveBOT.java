@@ -1,33 +1,32 @@
+
 package org.usfirst.frc.team2976.robot.commands;
 
+import org.usfirst.frc.team2976.robot.OI;
+import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team2976.robot.OI;
-import org.usfirst.frc.team2976.robot.subsystems.HookMotor;
+//import org.usfirst.frc.team2976.robot.Robot;
+
 /**
  *
  */
-public class RaiseHook extends Command {
-	HookMotor hookMotor = new HookMotor();
-	
-    public RaiseHook() {
-    	requires(hookMotor);
+public class DriveBOT extends Command {
+	public static DriveTrain drivetrain = new DriveTrain();
+    
+	public DriveBOT() {
+        // Use requires() here to declare subsystem dependencies
+        requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	hookMotor.raiseArm.set(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(OI.otherStick.getRawButton(OI.Button.A.getBtnNumber()))	{
-    		hookMotor.raiseArm.set(0.3);
-    	} else if(OI.otherStick.getRawButton(OI.Button.B.getBtnNumber()))	{
-    		hookMotor.raiseArm.set(-0.3);
-    	}	else	{
-    		hookMotor.raiseArm.set(0);
-    	}
+    	//drivetrain.m_drive.arcadeDrive(OI.LeftJoyStick);
+    	DriveTrain.m_drive.arcadeDrive(OI.driveStick.getLY(), OI.driveStick.getRX(),true);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
