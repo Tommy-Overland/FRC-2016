@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team2976.robot.commands.AutoRaisePortcullis;
 import org.usfirst.frc.team2976.robot.commands.DriveStraight;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
 
@@ -40,8 +41,8 @@ public class OI {
 		}
 	}
 	public OI()	{
-		(new JoystickButton(OI.driveStick, Button.LBumper.getBtnNumber())).whileHeld(new DriveStraight()); //Start the DriveStraight Command when held
-		
+		//(new JoystickButton(OI.driveStick, Button.LBumper.getBtnNumber())).whileHeld(new DriveStraight()); //Start the DriveStraight Command when held
+		//(new JoystickButton(OI.driveStick, Button.RBumper.getBtnNumber())).whileHeld(new AutoRaisePortcullis());
 	}
 	
 	public static Joystick driveStick = new Joystick(0);

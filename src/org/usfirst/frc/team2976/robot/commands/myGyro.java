@@ -4,8 +4,6 @@ import org.usfirst.frc.team2976.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GyroBase;
-
 
 /**
  * @author NeilHazra

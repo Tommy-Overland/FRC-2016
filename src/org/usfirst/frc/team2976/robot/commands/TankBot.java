@@ -17,8 +17,8 @@ public class TankBot extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		DriveTrain.leftBackMotor.set(-OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()));
-		DriveTrain.leftFrontMotor.set(-OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()));
+		DriveTrain.leftBackMotor.set(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()));
+		DriveTrain.leftFrontMotor.set(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()));
 		DriveTrain.rightBackMotor.set(OI.driveStick.getRawAxis(OI.Axis.RY.getAxisNumber()));
 		DriveTrain.rightFrontMotor.set(OI.driveStick.getRawAxis(OI.Axis.RY.getAxisNumber()));
 	}
