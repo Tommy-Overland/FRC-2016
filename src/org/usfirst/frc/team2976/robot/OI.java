@@ -45,8 +45,8 @@ public class OI {
 		//(new JoystickButton(OI.driveStick, Button.RBumper.getBtnNumber())).whileHeld(new AutoRaisePortcullis());
 	}
 	
-	public static Joystick driveStick = new Joystick(0);
-	public static Joystick otherStick = new Joystick(1);
+	public static XBoxController driveStick = new XBoxController(0);
+	public static XBoxController otherStick = new XBoxController(1);
 	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
@@ -74,5 +74,9 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	
+	 public Joystick getJoystick() {
+	        return driveStick;
+	    }
 }
 

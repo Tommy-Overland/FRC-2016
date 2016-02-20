@@ -15,7 +15,7 @@ public class RobotMap {
 	public static final int RightArmMotor = 6;
 	public static final int LeftArmMotor = 5;
 		
-	public static final int rollerMotorID = 7;
+	public static final int rollerMotorID = 10;
 	
 	public static final int GyroInput = 1;
 	
@@ -24,8 +24,8 @@ public class RobotMap {
 	public static final int LeftArmEncoderA = 2;
 	public static final int LeftArmEncoderB = 3;
 	
-	public static final int RaiseHookMotor = 0;
-	public static final int RaiseHookSolenoid = 0;
+	public static final int RaiseHookMotor = 7;
+	public static final int RaiseHookSolenoid = 1;
 	
 	public static final int  PickUpRobotA = 8;
 	public static final int  PickUpRobotB = 9;

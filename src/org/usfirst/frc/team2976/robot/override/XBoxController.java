@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2976.robot;
+package org.usfirst.frc.team2976.robot.override;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -16,7 +16,6 @@ public class XBoxController extends Joystick {
 		private final int YButton=4;
 		private final int LBumber=5;
 		private final int RBumber=6;
-		
 	public XBoxController(int port) {
 		super(port);
 		// TODO Auto-generated constructor stub
