@@ -24,9 +24,9 @@ public class RunRoller extends Command {
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (OI.driveStick.getRawButton(5)) {
+		if (OI.otherStick.getRawButton(OI.Button.RightJoystickBtn.getBtnNumber())) {
 			roller.roller.set(1);
-		} else if (OI.driveStick.getRawButton(6)) {
+		} else if (OI.otherStick.getRawButton(OI.Button.LeftJoystickBtn.getBtnNumber())) {
 			roller.roller.set(-1);
 		} else {
 	    	roller.roller.set(0);

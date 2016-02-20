@@ -23,13 +23,15 @@ public class RaiseRobot extends Command {
     protected void execute() {
     	if(OI.otherStick.getRawButton(OI.Button.RBumper.getBtnNumber()))	{
         	raiseRobotMotor.liftingMotorA.set(0.6);
-        	raiseRobotMotor.liftingMotorB.set(0.5);
+        	raiseRobotMotor.liftingMotorB.set(0.6);
     	} else if(OI.otherStick.getRawButton(OI.Button.LBumper.getBtnNumber()))	{
-        	raiseRobotMotor.liftingMotorA.set(-0.6);
-        	raiseRobotMotor.liftingMotorB.set(-0.6);
+        	raiseRobotMotor.liftingMotorA.set(-0.1);
+        	raiseRobotMotor.liftingMotorB.set(-0.1);
     	}	else	{
     		raiseRobotMotor.liftingMotorA.set(0);
         	raiseRobotMotor.liftingMotorB.set(0);
+        	raiseRobotMotor.liftingMotorA.enableBrakeMode(true);
+        	raiseRobotMotor.liftingMotorB.enableBrakeMode(true);
     	}
     }
 

@@ -25,8 +25,8 @@ public class DriveBOT extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//drivetrain.m_drive.arcadeDrive(OI.LeftJoyStick);
-    	DriveTrain.m_drive.arcadeDrive(OI.driveStick.getLY(), -OI.driveStick.getRX(),true);
-    	
+    	DriveTrain.m_drive.arcadeDrive(OI.driveStick.getLY(), OI.driveStick.getRX(),true);
+    	//Reverse to compensate for mixed axis
     }
 
     // Make this return true when this Command no longer needs to run execute()

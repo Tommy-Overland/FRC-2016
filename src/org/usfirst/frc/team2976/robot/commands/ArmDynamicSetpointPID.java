@@ -58,6 +58,7 @@ public class ArmDynamicSetpointPID extends Command {
    	
     	//ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
     	//ArmMotors.rightArm.set(rightArmDynamicPID.getOutput());   
+    	
   
     	//**************Debug Info*******************//
     	SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));
@@ -66,8 +67,6 @@ public class ArmDynamicSetpointPID extends Command {
     	SmartDashboard.putNumber("LeftInput", leftArmDynamicPID.getInput());
     	SmartDashboard.putNumber("LeftOutput", leftArmDynamicPID.getOutput());
     	SmartDashboard.putNumber("LeftError", leftArmDynamicPID.getError());
-    	
-    	
     	//**************Debug Info******************//
     }
     protected boolean isFinished() {

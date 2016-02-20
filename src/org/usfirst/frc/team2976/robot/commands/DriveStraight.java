@@ -45,6 +45,10 @@ public class DriveStraight extends Command {
 			Robot.TankBOT.cancel(); // Interrupt the regular DriveFuntion
 			ForcedInterrupted = Robot.TankBOT;
 		}
+		if (Robot.DriveBot.isRunning()) {
+			Robot.DriveBot.cancel(); // Interrupt the regular DriveFuntion
+			ForcedInterrupted = Robot.DriveBot;
+		}
 		RobotAnglePID.isEnabled(true); // Start the PID
 		gyropidsource.reset();
 	}
@@ -55,6 +59,8 @@ public class DriveStraight extends Command {
 		DriveTrain.rightFrontMotor.set(OI.driveStick.getY() /*+ RobotAnglePID.getOutput()*/); //Correct the leftMotor	
 		DriveTrain.leftBackMotor.set(OI.driveStick.getY() + RobotAnglePID.getOutput()); //Correct the rightMotor
 		DriveTrain.rightBackMotor.set(OI.driveStick.getY() /*+ RobotAnglePID.getOutput()*/); //Correct the leftMotor
+		
+		
 		//Test 
 		/*
 			if(RobotAnglePID.getOutput()>0)	{
