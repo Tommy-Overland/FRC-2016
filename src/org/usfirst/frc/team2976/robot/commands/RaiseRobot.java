@@ -22,11 +22,11 @@ public class RaiseRobot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(OI.otherStick.getRawButton(OI.Button.RBumper.getBtnNumber()))	{
-        	raiseRobotMotor.liftingMotorA.set(0.5);
+        	raiseRobotMotor.liftingMotorA.set(0.6);
         	raiseRobotMotor.liftingMotorB.set(0.5);
     	} else if(OI.otherStick.getRawButton(OI.Button.LBumper.getBtnNumber()))	{
-        	raiseRobotMotor.liftingMotorA.set(-0.3);
-        	raiseRobotMotor.liftingMotorB.set(-0.3);
+        	raiseRobotMotor.liftingMotorA.set(-0.6);
+        	raiseRobotMotor.liftingMotorB.set(-0.6);
     	}	else	{
     		raiseRobotMotor.liftingMotorA.set(0);
         	raiseRobotMotor.liftingMotorB.set(0);

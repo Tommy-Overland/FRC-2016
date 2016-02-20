@@ -26,9 +26,8 @@ public class RobotMap {
 	
 	public static final int RaiseHookMotor = 7;
 	public static final int RaiseHookSolenoid = 1;
-	
-	public static final int  PickUpRobotA = 8;
-	public static final int  PickUpRobotB = 9;
+	public static final int PickUpRobotA = 8;
+	public static final int PickUpRobotB = 9;
 	
 	public static final int RightDriveEncoderA = 0;
 	public static final int RightDriveEncoderB = 0;

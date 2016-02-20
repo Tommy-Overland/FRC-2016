@@ -25,7 +25,7 @@ public class DriveBOT extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//drivetrain.m_drive.arcadeDrive(OI.LeftJoyStick);
-    	DriveTrain.m_drive.arcadeDrive(OI.driveStick.getLY(), OI.driveStick.getRX(),true);
+    	DriveTrain.m_drive.arcadeDrive(OI.driveStick.getLY(), -OI.driveStick.getRX(),true);
     	
     }
 
@@ -34,7 +34,7 @@ public class DriveBOT extends Command {
         return false;
     }
 
-    // Called once after isFinished returns true
+    // Called once after isFinished returns true 
     protected void end() {
     }
 

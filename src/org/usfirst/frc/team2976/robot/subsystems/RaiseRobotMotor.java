@@ -14,6 +14,8 @@ public class RaiseRobotMotor extends Subsystem {
 	public CANTalon liftingMotorB = new CANTalon(RobotMap.PickUpRobotB);
 
     public void initDefaultCommand() {
+    	liftingMotorA.reverseOutput(true);
+    	liftingMotorB.reverseOutput(true);
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
