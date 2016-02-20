@@ -28,5 +28,5 @@ public class RobotMap {
 	public static final int BackarmLiftMotor = 7;
 	public static final int BackarmPullFrontMotor = 8;
 	public static final int BackarmPullBackMotor = 9;
-	public static final int BackarmSolenoid = 9;//ask lucas for port
+	public static final int BackarmSolenoid = 1;//ask lucas for port
 }
