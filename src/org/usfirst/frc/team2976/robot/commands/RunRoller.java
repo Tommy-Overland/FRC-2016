@@ -1,36 +1,40 @@
 package org.usfirst.frc.team2976.robot.commands;
 
 import org.usfirst.frc.team2976.robot.OI;
+import org.usfirst.frc.team2976.robot.Robot;
 import org.usfirst.frc.team2976.robot.subsystems.Roller;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class RunRoller extends Command {
-	Roller roller = new Roller();
+	Joystick m_joy;
 
-	public RunRoller() {
+	public RunRoller(Joystick joy) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(roller);
+		m_joy=joy;
+		requires(Robot.roller);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		roller.roller.set(0);
+		
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (OI.driveStick.getRawButton(5)) {
-			roller.roller.set(1);
-		} else if (OI.driveStick.getRawButton(6)) {
-			roller.roller.set(-1);
-		} else {
-	    	roller.roller.set(0);
-		}
+    	if (m_joy.getRawButton(5)){
+    		Robot.roller.in();
+    	} else if (m_joy.getRawButton(6)){
+    		Robot.roller.out();
+    	} else {
+    		Robot.roller.stop();
+    	}
+    
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

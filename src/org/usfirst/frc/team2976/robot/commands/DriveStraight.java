@@ -9,7 +9,7 @@ import org.usfirst.frc.team2976.robot.subsystems.PIDMain;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
- *@author NeilHazra
+ *@author Hippopotamus AKA Neil Hazra
  */
 public class DriveStraight extends Command {
 	DriveTrain driveTrain = new DriveTrain();

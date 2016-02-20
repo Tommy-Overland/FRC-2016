@@ -67,7 +67,9 @@ public class ArmDynamicSetpointPID extends Command {
     	ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
     	ArmMotors.rightArm.set(rightArmDynamicPID.getOutput());
     	//SmartDashboard.put
-    
+    	SmartDashboard.putNumber("Ampeare Left Arm", ArmMotors.leftArm.getOutputCurrent());
+    	SmartDashboard.putNumber("Ampeare Right Arm", ArmMotors.rightArm.getOutputCurrent());
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

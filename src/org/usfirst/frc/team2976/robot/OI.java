@@ -8,7 +8,7 @@ import org.usfirst.frc.team2976.robot.commands.DriveStraight;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
 
 /**
- * @author NeilHazra
+ * @author Hippopotomus AKA Neil Hazra
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
@@ -45,7 +45,7 @@ public class OI {
 	}
 	
 	public static Joystick driveStick = new Joystick(0);
-	public static Joystick otherStick = new Joystick(1);
+	public static Joystick otherStick = new Joystick(1);//Consider renaming this variable
 	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2976.robot.commands.ArcadeBot;
 import org.usfirst.frc.team2976.robot.commands.ArmDynamicSetpointPID;
+//import org.usfirst.frc.team2976.robot.commands.Autonomous;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2976.robot.subsystems.Backarm;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2976.robot.subsystems.Roller;
 import org.usfirst.frc.team2976.robot.commands.RunRoller;
 import org.usfirst.frc.team2976.robot.commands.TankBot;
 import org.usfirst.frc.team2976.robot.commands.startCompressor;
@@ -26,73 +29,77 @@ import org.usfirst.frc.team2976.robot.commands.startCompressor;
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final ArcadeBot ArcadeBOT = new ArcadeBot();
+	public static final ArcadeBot ArcadeBOT = new ArcadeBot();//Starting both bots makes fireworks
 	public static final TankBot TankBOT = new TankBot(); //Do not start both BOTS in a single program
 	public static final ArmDynamicSetpointPID armPID = new ArmDynamicSetpointPID();
 	//Drive Commands are exclusive
 
 	public static OI oi;
 	public static DriveTrain drivetrain;
+	public static Roller roller;
+	public static Backarm backarm;
+
 	//Btn Commands are started in the OI constructor
 
-    Command autonomousCommand;
+	Command autonomousCommand;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
-    }
-	
+		// instantiate the command used for the autonomous period
+		//autonomousCommand = new Autonomous();
+	}
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-    public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
+	public void autonomousInit() {
+		// schedule the autonomous command (example)
+		autonomousCommand.start();
+		if (autonomousCommand != null) autonomousCommand.start();
+	}
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
-    public void teleopInit() {
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-     //   ArcadeBOT.start();
-        armPID.start();
-        //TankBOT.start();
-    }
+		// teleop starts running. If you want the autonomous to 
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null) autonomousCommand.cancel();
+		ArcadeBOT.start();
+		//armPID.start();
+		//TankBOT.start();
+	}
 
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
+	/**
+	 * This function is called when the disabled button is hit.
+	 * You can use it to reset subsystems before shutting down.
+	 */
+	public void disabledInit(){
 
-    }
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }

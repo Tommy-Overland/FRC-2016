@@ -18,5 +18,22 @@ public class Roller extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
+    public void in() {
+        roller.set(-1);
+    }
+
+    public void out() {
+        roller.set(1);
+    }
+    
+    /**
+     * Stops the claw motor from moving.
+     */
+    public void stop() {
+        roller.set(0);
+    }
+    
+    
 }
 

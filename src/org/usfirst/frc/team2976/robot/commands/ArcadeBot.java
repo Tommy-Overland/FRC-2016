@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArcadeBot extends Command {
+	private final int fineControlButton=2;//I hope this is "B", most convenient button w/o disturbing most other functions
 	DriveTrain driveTrain = new DriveTrain();
 	public ArcadeBot() {
 		requires(driveTrain);
@@ -17,7 +18,8 @@ public class ArcadeBot extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		DriveTrain.m_drive.arcadeDrive(OI.driveStick);
+		//DriveTrain.m_drive.arcadeDrive(OI.driveStick);//VERY STUPID, you create the object drivetrain just so you can require it, redundant
+		driveTrain.goodArcade(OI.driveStick, driveTrain.fineControlPress(OI.driveStick, fineControlButton));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
