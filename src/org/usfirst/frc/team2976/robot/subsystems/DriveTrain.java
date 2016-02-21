@@ -28,6 +28,13 @@ public class DriveTrain extends Subsystem {
 		//leftBackMotor.reverseOutput(true);
 	}
 	
+	public void reset(){
+		rightFrontMotor.set(0);
+		leftFrontMotor.set(0);
+		rightBackMotor.set(0);
+		leftBackMotor.set(0);
+	}
+	
 
 	
 	

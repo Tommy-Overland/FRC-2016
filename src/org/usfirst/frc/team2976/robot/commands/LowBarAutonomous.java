@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LowBarAutonomous extends CommandGroup {
     public LowBarAutonomous() {
      addSequential(new AutoDriveStraight(4));
+     addSequential(new AutoTurn(40, 1));
+     addSequential(new AutoDriveStraight(3));
      addSequential(new AutoRunRoller());
+     
      
     }
 }

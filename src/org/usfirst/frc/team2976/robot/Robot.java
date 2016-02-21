@@ -23,6 +23,7 @@ import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2976.robot.subsystems.Roller;
 import org.usfirst.frc.team2976.robot.commands.RunRoller;
 import org.usfirst.frc.team2976.robot.commands.TankBot;
+import org.usfirst.frc.team2976.robot.commands.myGyro;
 import org.usfirst.frc.team2976.robot.commands.startCompressor;
 
 /**
@@ -55,7 +56,9 @@ public class Robot extends IterativeRobot {
 	public static LeftDriveEncoder leftdriveencoder;
 	public static RightDriveEncoder rightdriveencoder;
 	public static Roller roller;
+	public static myGyro mygyro;
 	//Btn Commands are started in the OI constructor
+	//public static Object mygyro;
 	
 
    

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2976.robot.commands;
 
 import org.usfirst.frc.team2976.robot.OI;
+import org.usfirst.frc.team2976.robot.Robot;
 import org.usfirst.frc.team2976.robot.subsystems.Roller;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,18 +20,19 @@ public class AutoRunRoller extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		roller.roller.set(0);
+		Robot.roller.rollerStop();
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (OI.driveStick.getRawButton(5)) {
-			roller.roller.set(1);
-		} else if (OI.driveStick.getRawButton(6)) {
-			roller.roller.set(-1);
-		} else {
-	    	roller.roller.set(0);
+		Robot.roller.rollerIn();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		Robot.roller.rollerIn();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
