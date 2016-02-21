@@ -23,7 +23,8 @@ public class RobotMap {
 	public static final int RightArmEncoderB = 3;
 	public static final int LeftArmEncoderA = 0;
 	public static final int LeftArmEncoderB = 1;
-	
+	public static final int ArmHighSwitch = 0;
+	public static final int ArmLowSwitch = 0;
 	public static final int RaiseHookMotor = 7;
 	public static final int RaiseHookSolenoid = 1;
 	public static final int PickUpRobotA = 8;

@@ -90,7 +90,10 @@ public class PIDMain {
 	 */	
 	private class PIDCompute extends TimerTask	{
 		public void run()	{  
-			if(!enabled) return;	
+			if(!enabled) {
+				output = 0;
+				return;	
+			}
 			    
 				input = pidsource.getInput();
 				error = input - setpoint; 

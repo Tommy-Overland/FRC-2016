@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2976.robot.commands;
 
 import org.usfirst.frc.team2976.robot.OI;
+import org.usfirst.frc.team2976.robot.subsystems.ArmLimitSwitches;
 import org.usfirst.frc.team2976.robot.subsystems.ArmMotors;
 import org.usfirst.frc.team2976.robot.subsystems.LeftEncoderPIDSource;
 import org.usfirst.frc.team2976.robot.subsystems.PIDMain;
@@ -14,25 +15,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ArmDynamicSetpointPID extends Command {
 	final int ARM_SPEED_REDUCER = 4;
-	final int ArmMinEncoderValue = 0;
-	final int ArmMaxEncoderValue = 1000;
+	int ArmMinEncoderValue = 0;
+	int ArmMaxEncoderValue = 500;
 	final int sampleTime = 100;
 	
 	/** Proportional gain */
 	final double kp = -0.005;	
 	/**Integral Gain */
 	final double ki = 0;	
+	
 	/**Derivative Gain*/
 	final double kd = 0.0;
 	
-	double min = -0.3;///ARM_SPEED_REDUCER; //Divide by how much slower you want the max speed
-	double max = 0.3;///ARM_SPEED_REDUCER;
+	double min = -0.25;///ARM_SPEED_REDUCER; //Divide by how much slower you want the max speed
+	double max = 0.25;///ARM_SPEED_REDUCER;
 	
 	final int centerValue = 0; //Place Holding Variable
 	public static ArmMotors armMotors = new ArmMotors();	
 	public static LeftEncoderPIDSource leftEncoderPIDSource = new LeftEncoderPIDSource();
 	public static RightEncoderPIDSource rightEncoderPIDSource = new RightEncoderPIDSource();
-	
+	public static ArmLimitSwitches armSwitch = new ArmLimitSwitches();
 	public PIDMain leftArmDynamicPID = new PIDMain(leftEncoderPIDSource, centerValue, sampleTime, kp, ki, kd);
 	public PIDMain rightArmDynamicPID = new PIDMain(rightEncoderPIDSource, centerValue, sampleTime, kp, ki, kd);
 	
@@ -56,14 +58,34 @@ public class ArmDynamicSetpointPID extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	leftArmDynamicPID.setSetpoint(PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
-    	rightArmDynamicPID.setSetpoint(PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
-    	
+    	//Sets the Encoder Targets Properly
+    	if(armSwitch.low_switch.get())	{
+    		ArmMaxEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
+    	}
+    	if(armSwitch.high_switch.get())	{
+    		ArmMinEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
+    	}
+    	//Disables PID and breaks when Joystick is between certain Threshold
+    	double x = OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber());
+    	if(Math.abs(x) <= 0.2)
+    	{
+    		leftArmDynamicPID.isEnabled(false);
+    		rightArmDynamicPID.isEnabled(false);
+    		ArmMotors.leftArm.enableBrakeMode(true);
+    		ArmMotors.rightArm.enableBrakeMode(true);
+    	}	else	{ //Not disabled if Joystick is OK
+    		leftArmDynamicPID.isEnabled(true);
+    		rightArmDynamicPID.isEnabled(true);
+    		ArmMotors.leftArm.enableBrakeMode(false);
+    		ArmMotors.rightArm.enableBrakeMode(false);	
+    	}
+    	//Set the Mapped Setpoints
+    	leftArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
+    	rightArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
+    	//Run the motors
     	ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
     	ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
-    	//ArmMotors.leftArm.set(0.3);
-    	//ArmMotors.rightArm.set(-0.3);   
-  
+ 
     	//***	***********Debug Info*******************//
     	SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));
     	SmartDashboard.putNumber("RightInput", rightArmDynamicPID.getInput());

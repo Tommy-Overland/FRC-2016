@@ -16,6 +16,6 @@ public class LeftArmEncoder {
 
 	public double getLeftArmPosition() {
 		motor1position = MotorLeftEncoder.get();
-		return motor1position*360/250;
+		return motor1position;
 	}
 }
