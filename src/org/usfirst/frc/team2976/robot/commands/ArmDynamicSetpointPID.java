@@ -67,7 +67,7 @@ public class ArmDynamicSetpointPID extends Command {
     		//ArmMinEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
     	//}
     	//Disables PID and breaks when Joystick is between certain Threshold
-    	double x = -OI.otherStick.getRawAxis(OI.Axis.LY.getAxisNumber());
+    	double x = OI.otherStick.getRawAxis(OI.Axis.LY.getAxisNumber());
     	if(Math.abs(x) <= 0.2)
     	{
     		leftArmDynamicPID.isEnabled(false);
