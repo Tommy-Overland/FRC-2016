@@ -17,7 +17,9 @@ import org.usfirst.frc.team2976.robot.commands.LeftDriveEncoder;
 import org.usfirst.frc.team2976.robot.commands.RaiseBackArm;
 import org.usfirst.frc.team2976.robot.commands.RaiseHook;
 import org.usfirst.frc.team2976.robot.commands.RaiseRobot;
+import org.usfirst.frc.team2976.robot.commands.RampartsAutonomous;
 import org.usfirst.frc.team2976.robot.commands.RightDriveEncoder;
+import org.usfirst.frc.team2976.robot.commands.RoughTerrainAutonomous;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2976.robot.subsystems.Roller;
@@ -58,7 +60,7 @@ public class Robot extends IterativeRobot {
 	public static Roller roller;
 	public static myGyro mygyro;
 	//Btn Commands are started in the OI constructor
-	//public static Object mygyro;
+
 	
 
    
@@ -81,7 +83,9 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Default program", new LowBarAutonomous());
+		autoChooser.addDefault("Low Bar Autonomous", new LowBarAutonomous());
+		autoChooser.addDefault("Ramparts Autonomous", new RampartsAutonomous());
+		autoChooser.addDefault("Rough Terrain", new RoughTerrainAutonomous());
 		SmartDashboard.putData("Autonomous mode chooser", autoChooser);
 	}
 	
