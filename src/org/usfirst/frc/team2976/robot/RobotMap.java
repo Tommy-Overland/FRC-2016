@@ -19,10 +19,10 @@ public class RobotMap {
 	
 	public static final int GyroInput = 1;
 	
-	public static final int RightArmEncoderA = 0;
-	public static final int RightArmEncoderB = 1;
-	public static final int LeftArmEncoderA = 2;
-	public static final int LeftArmEncoderB = 3;
+	public static final int RightArmEncoderA = 2;
+	public static final int RightArmEncoderB = 3;
+	public static final int LeftArmEncoderA = 0;
+	public static final int LeftArmEncoderB = 1;
 	
 	public static final int RaiseHookMotor = 7;
 	public static final int RaiseHookSolenoid = 1;

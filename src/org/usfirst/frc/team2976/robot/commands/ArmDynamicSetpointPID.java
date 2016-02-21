@@ -15,15 +15,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ArmDynamicSetpointPID extends Command {
 	final int ARM_SPEED_REDUCER = 4;
 	final int ArmMinEncoderValue = 0;
-	final int ArmMaxEncoderValue = 100;
+	final int ArmMaxEncoderValue = 1000;
 	final int sampleTime = 100;
 	
 	/** Proportional gain */
-	final double kp = 0.01;	
+	final double kp = -0.005;	
 	/**Integral Gain */
 	final double ki = 0;	
 	/**Derivative Gain*/
-	final double kd = 0;
+	final double kd = 0.0;
+	
+	double min = -0.3;///ARM_SPEED_REDUCER; //Divide by how much slower you want the max speed
+	double max = 0.3;///ARM_SPEED_REDUCER;
 	
 	final int centerValue = 0; //Place Holding Variable
 	public static ArmMotors armMotors = new ArmMotors();	
@@ -38,35 +41,39 @@ public class ArmDynamicSetpointPID extends Command {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    	double min = -1/ARM_SPEED_REDUCER; //Divide by how much slower you want the max speed
-		double max = 1/ARM_SPEED_REDUCER;
-		
+    protected void initialize() {		
 		leftEncoderPIDSource.reset();
 		rightEncoderPIDSource.reset();
 		
     	leftArmDynamicPID.isEnabled(true);
     	rightArmDynamicPID.isEnabled(true);
+    	
     	leftArmDynamicPID.setOutputLimits(min, max);
     	rightArmDynamicPID.setOutputLimits(min, max);
+    	
+    	//ArmMotors.leftArm.reverseOutput(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	leftArmDynamicPID.setSetpoint(PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
     	rightArmDynamicPID.setSetpoint(PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
-   	
-    	//ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
-    	//ArmMotors.rightArm.set(rightArmDynamicPID.getOutput());   
     	
+    	ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
+    	ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
+    	//ArmMotors.leftArm.set(0.3);
+    	//ArmMotors.rightArm.set(-0.3);   
   
-    	//**************Debug Info*******************//
+    	//***	***********Debug Info*******************//
     	SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));
     	SmartDashboard.putNumber("RightInput", rightArmDynamicPID.getInput());
     	SmartDashboard.putNumber("RightOutput", rightArmDynamicPID.getOutput());
+    	SmartDashboard.putNumber("RightError", rightArmDynamicPID.getError());
     	SmartDashboard.putNumber("LeftInput", leftArmDynamicPID.getInput());
     	SmartDashboard.putNumber("LeftOutput", leftArmDynamicPID.getOutput());
     	SmartDashboard.putNumber("LeftError", leftArmDynamicPID.getError());
+    	SmartDashboard.putNumber("Max", max);
+    	SmartDashboard.putNumber("Min", min);
     	//**************Debug Info******************//
     }
     protected boolean isFinished() {
