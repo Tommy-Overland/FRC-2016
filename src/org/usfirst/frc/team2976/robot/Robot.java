@@ -5,16 +5,22 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2976.robot.commands.ArcadeBot;
 import org.usfirst.frc.team2976.robot.commands.ArmDynamicSetpointPID;
+import org.usfirst.frc.team2976.robot.commands.LowBarAutonomous;
 import org.usfirst.frc.team2976.robot.commands.DriveBOT;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2976.robot.commands.LeftDriveEncoder;
 import org.usfirst.frc.team2976.robot.commands.RaiseBackArm;
 import org.usfirst.frc.team2976.robot.commands.RaiseHook;
 import org.usfirst.frc.team2976.robot.commands.RaiseRobot;
+import org.usfirst.frc.team2976.robot.commands.RightDriveEncoder;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2976.robot.subsystems.Roller;
 import org.usfirst.frc.team2976.robot.commands.RunRoller;
 import org.usfirst.frc.team2976.robot.commands.TankBot;
 import org.usfirst.frc.team2976.robot.commands.startCompressor;
@@ -29,6 +35,9 @@ import org.usfirst.frc.team2976.robot.commands.startCompressor;
  */
 public class Robot extends IterativeRobot {
 
+	Command autonomousCommand;
+	SendableChooser autoChooser;
+	
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final ArcadeBot ArcadeBOT = new ArcadeBot();
 	public static final TankBot TankBOT = new TankBot(); //Do not start both BOTS in a single program
@@ -37,31 +46,46 @@ public class Robot extends IterativeRobot {
 	public static final RaiseHook raiseHook = new RaiseHook();
 	public static final DriveBOT DriveBot = new DriveBOT();
 	public static final RaiseBackArm raiseBackArm = new RaiseBackArm();
+	
+	
 	//Drive Commands are exclusive
 
 	public static OI oi;
 	public static DriveTrain drivetrain;
+	public static LeftDriveEncoder leftdriveencoder;
+	public static RightDriveEncoder rightdriveencoder;
+	public static Roller roller;
 	//Btn Commands are started in the OI constructor
+	
 
-    Command autonomousCommand;
+   
+    
+   
 
+    
+   // Command autonomousCommand;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+
     }
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Default program", new LowBarAutonomous());
+		SmartDashboard.putData("Autonomous mode chooser", autoChooser);
 	}
+	
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        autonomousCommand = (Command)autoChooser.getSelected();
+        if(autonomousCommand != null) autonomousCommand.start();
     }
 
     /**

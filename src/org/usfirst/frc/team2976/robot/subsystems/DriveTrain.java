@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2976.robot.subsystems;
 
 import org.usfirst.frc.team2976.robot.RobotMap;
+import org.usfirst.frc.team2976.robot.commands.LeftDriveEncoder;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import org.usfirst.frc.team2976.robot.override.TankDrivePlus;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,10 +18,17 @@ public class DriveTrain extends Subsystem {
 	
 	public static TankDrivePlus m_drive = new TankDrivePlus(leftBackMotor, leftFrontMotor,rightBackMotor, rightBackMotor); //Robot Drive Class
 	
+	public void drive(double left, double right) {
+		m_drive.tankDrive(left, right);
+	}
 	public void initDefaultCommand() {
 		//rightFrontMotor.reverseOutput(true);
 		//rightBackMotor.reverseOutput(true);
 		//leftFrontMotor.reverseOutput(true);
 		//leftBackMotor.reverseOutput(true);
 	}
+	
+
+	
+	
 }

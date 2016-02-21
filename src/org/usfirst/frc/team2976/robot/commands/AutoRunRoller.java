@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2976.robot.commands;
 
 import org.usfirst.frc.team2976.robot.OI;
-import org.usfirst.frc.team2976.robot.Robot;
 import org.usfirst.frc.team2976.robot.subsystems.Roller;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,28 +8,28 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunRoller extends Command {
-	//Roller roller = new Roller();
+public class AutoRunRoller extends Command {
+	Roller roller = new Roller();
 
-	public RunRoller() {
+	public AutoRunRoller() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.roller);
+		requires(roller);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.roller.rollerStop();
+		roller.roller.set(0);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (OI.driveStick.getRawButton(5)) {
-			Robot.roller.rollerIn();
+			roller.roller.set(1);
 		} else if (OI.driveStick.getRawButton(6)) {
-			Robot.roller.rollerOut();
+			roller.roller.set(-1);
 		} else {
-	    	Robot.roller.rollerStop();
+	    	roller.roller.set(0);
 		}
 	}
 

@@ -18,4 +18,7 @@ public class LeftDriveEncoder {
 		motor1position = MotorLeftEncoder.get();
 		return motor1position;
 	}
+
+	
+
 }
