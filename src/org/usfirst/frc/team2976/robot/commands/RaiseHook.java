@@ -22,9 +22,9 @@ public class RaiseHook extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(OI.otherStick.getRawButton(OI.Button.A.getBtnNumber()))	{
-    		hookMotor.raiseArm.set(0.3);
+    		hookMotor.raiseArm.set(1);
     	} else if(OI.otherStick.getRawButton(OI.Button.B.getBtnNumber()))	{
-    		hookMotor.raiseArm.set(-0.3);
+    		hookMotor.raiseArm.set(-1);
     	}	else	{
     		hookMotor.raiseArm.set(0);
     	}

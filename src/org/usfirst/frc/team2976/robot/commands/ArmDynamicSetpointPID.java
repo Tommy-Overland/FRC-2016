@@ -16,19 +16,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ArmDynamicSetpointPID extends Command {
 	final int ARM_SPEED_REDUCER = 4;
 	int ArmMinEncoderValue = 0;
-	int ArmMaxEncoderValue = 500;
+	int ArmMaxEncoderValue = 570;
 	final int sampleTime = 100;
 	
 	/** Proportional gain */
-	final double kp = -0.005;	
+	final double kp = 0.005;	
 	/**Integral Gain */
 	final double ki = 0;	
 	
 	/**Derivative Gain*/
 	final double kd = 0.0;
 	
-	double min = -0.25;///ARM_SPEED_REDUCER; //Divide by how much slower you want the max speed
-	double max = 0.25;///ARM_SPEED_REDUCER;
+	double min = -0.33;///ARM_SPEED_REDUCER; //Divide by how much slower you want the max speed
+	double max = 0.33;///ARM_SPEED_REDUCER;
 	
 	final int centerValue = 0; //Place Holding Variable
 	public static ArmMotors armMotors = new ArmMotors();	
@@ -67,7 +67,7 @@ public class ArmDynamicSetpointPID extends Command {
     		//ArmMinEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
     	//}
     	//Disables PID and breaks when Joystick is between certain Threshold
-    	double x = OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber());
+    	double x = -OI.otherStick.getRawAxis(OI.Axis.LY.getAxisNumber());
     	if(Math.abs(x) <= 0.2)
     	{
     		leftArmDynamicPID.isEnabled(false);
@@ -84,8 +84,8 @@ public class ArmDynamicSetpointPID extends Command {
     	leftArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
     	rightArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
     	//Run the motors
-    	//ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
-    	//ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
+    	ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
+    	ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
  
     	//***	***********Debug Info*******************//
     	SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));

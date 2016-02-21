@@ -42,7 +42,7 @@ public class OI {
 	}
 	
 	public OI()	{
-		//(new JoystickButton(OI.driveStick, Button.LBumper.getBtnNumber())).whileHeld(new DriveStraight()); //Start the DriveStraight Command when held
+		(new JoystickButton(OI.driveStick, Button.LBumper.getBtnNumber())).whileHeld(new DriveStraight()); //Start the DriveStraight Command when held
 		//(new JoystickButton(OI.driveStick, Button.RBumper.getBtnNumber())).whileHeld(new AutoRaisePortcullis());
 	}
 	
