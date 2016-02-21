@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class ArmLimitSwitches extends Subsystem {
     public DigitalInput high_switch = new DigitalInput(RobotMap.ArmHighSwitch);
     public DigitalInput low_switch = new DigitalInput(RobotMap.ArmLowSwitch);
+    
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void initDefaultCommand() {

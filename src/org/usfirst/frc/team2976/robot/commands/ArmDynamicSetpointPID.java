@@ -34,12 +34,13 @@ public class ArmDynamicSetpointPID extends Command {
 	public static ArmMotors armMotors = new ArmMotors();	
 	public static LeftEncoderPIDSource leftEncoderPIDSource = new LeftEncoderPIDSource();
 	public static RightEncoderPIDSource rightEncoderPIDSource = new RightEncoderPIDSource();
-	public static ArmLimitSwitches armSwitch = new ArmLimitSwitches();
+	//public static ArmLimitSwitches armSwitch = new ArmLimitSwitches();
 	public PIDMain leftArmDynamicPID = new PIDMain(leftEncoderPIDSource, centerValue, sampleTime, kp, ki, kd);
 	public PIDMain rightArmDynamicPID = new PIDMain(rightEncoderPIDSource, centerValue, sampleTime, kp, ki, kd);
 	
     public ArmDynamicSetpointPID() {
     	requires(armMotors);
+    	//requires(armSwitch);
     }
 
     // Called just before this Command runs the first time
@@ -59,12 +60,12 @@ public class ArmDynamicSetpointPID extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Sets the Encoder Targets Properly
-    	if(armSwitch.low_switch.get())	{
-    		ArmMaxEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
-    	}
-    	if(armSwitch.high_switch.get())	{
-    		ArmMinEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
-    	}
+    	//if(armSwitch.low_switch.get())	{
+    		//ArmMaxEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
+    	//}
+    	//if(armSwitch.high_switch.get())	{
+    		//ArmMinEncoderValue = (int) ((leftArmDynamicPID.getInput()+rightArmDynamicPID.getInput())/2);
+    	//}
     	//Disables PID and breaks when Joystick is between certain Threshold
     	double x = OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber());
     	if(Math.abs(x) <= 0.2)
@@ -83,8 +84,8 @@ public class ArmDynamicSetpointPID extends Command {
     	leftArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
     	rightArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
     	//Run the motors
-    	ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
-    	ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
+    	//ArmMotors.leftArm.set(leftArmDynamicPID.getOutput());
+    	//ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
  
     	//***	***********Debug Info*******************//
     	SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));
