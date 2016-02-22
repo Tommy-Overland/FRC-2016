@@ -16,11 +16,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ArmDynamicSetpointPID extends Command {
 	final int ARM_SPEED_REDUCER = 4;
 	int ArmMinEncoderValue = 0;
-	int ArmMaxEncoderValue = 570;
+	int ArmMaxEncoderValue = 550;
+	
 	final int sampleTime = 100;
 	
 	/** Proportional gain */
-	final double kp = 0.005;	
+	final double kp = -0.005;	
 	/**Integral Gain */
 	final double ki = 0;	
 	
@@ -80,6 +81,7 @@ public class ArmDynamicSetpointPID extends Command {
     		ArmMotors.leftArm.enableBrakeMode(false);
     		ArmMotors.rightArm.enableBrakeMode(false);	
     	}
+    
     	//Set the Mapped Setpoints
     	leftArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input
     	rightArmDynamicPID.setSetpoint(PIDMain.map(x, -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));  //Maps the setpoint to the same range as the input

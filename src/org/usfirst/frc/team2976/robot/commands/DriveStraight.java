@@ -18,11 +18,11 @@ public class DriveStraight extends Command {
 	public GyroPIDSource gyropidsource = new GyroPIDSource(); // Implements
 																// PIDSource
 	/** Proportional gain */
-	double kp = 0;
+	double kp = 0.05;
 	/** Integral Gain */
-	double ki = 0;
+	double ki = 0.001;
 	/** Derivative Gain */
-	double kd = 0;
+	double kd = 0.004;
 
 	int robot_angle_setpoint = 0;
 
@@ -55,31 +55,31 @@ public class DriveStraight extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {		
-		DriveTrain.leftFrontMotor.set(OI.driveStick.getY() + RobotAnglePID.getOutput()); //Correct the rightMotor
-		DriveTrain.rightFrontMotor.set(OI.driveStick.getY() /*+ RobotAnglePID.getOutput()*/); //Correct the leftMotor	
-		DriveTrain.leftBackMotor.set(OI.driveStick.getY() + RobotAnglePID.getOutput()); //Correct the rightMotor
-		DriveTrain.rightBackMotor.set(OI.driveStick.getY() /*+ RobotAnglePID.getOutput()*/); //Correct the leftMotor
+		
+		//DriveTrain.leftFrontMotor.set(-OI.driveStick.getY() - RobotAnglePID.getOutput()); //Correct the rightMotor
+		//DriveTrain.rightFrontMotor.set(OI.driveStick.getY()); //+ RobotAnglePID.getOutput()); //Correct the leftMotor	
+		//DriveTrain.leftBackMotor.set(-OI.driveStick.getY() - RobotAnglePID.getOutput()); //Correct the rightMotor
+		//DriveTrain.rightBackMotor.set(OI.driveStick.getY() /*+ RobotAnglePID.getOutput()*/); //Correct the leftMotor
 		
 		
 		//Test 
-		/*
-			if(RobotAnglePID.getOutput()>0)	{
+			if(RobotAnglePID.getOutput()<0)	{
 			DriveTrain.leftFrontMotor.set(OI.driveStick.getY() + Math.abs(RobotAnglePID.getOutput())); //Correct the rightMotor
-			DriveTrain.rightFrontMotor.set(OI.driveStick.getY());
+			DriveTrain.rightFrontMotor.set(-OI.driveStick.getY());
 			DriveTrain.leftBackMotor.set(OI.driveStick.getY() + Math.abs(RobotAnglePID.getOutput())); //Correct the rightMotor
-			DriveTrain.rightBackMotor.set(OI.driveStick.getY());
-			}	else if(RobotAnglePID.getOutput()<0)	{
+			DriveTrain.rightBackMotor.set(-OI.driveStick.getY());
+			}	else if(RobotAnglePID.getOutput()>0)	{
 			DriveTrain.leftFrontMotor.set(OI.driveStick.getY()); 
-			DriveTrain.rightFrontMotor.set(OI.driveStick.getY() + Math.abs(RobotAnglePID.getOutput())); //Correct the leftMotor	
+			DriveTrain.rightFrontMotor.set(-OI.driveStick.getY() + -Math.abs(RobotAnglePID.getOutput())); //Correct the leftMotor	
 			DriveTrain.leftBackMotor.set(OI.driveStick.getY()); 
-			DriveTrain.rightBackMotor.set(OI.driveStick.getY() + Math.abs(RobotAnglePID.getOutput())); //Correct the leftMotor
+			DriveTrain.rightBackMotor.set(-OI.driveStick.getY() - Math.abs(RobotAnglePID.getOutput())); //Correct the leftMotor
 			}	else {	
 			DriveTrain.leftFrontMotor.set(OI.driveStick.getY()); 
-			DriveTrain.rightFrontMotor.set(OI.driveStick.getY()); //Correct the leftMotor	
+			DriveTrain.rightFrontMotor.set(-OI.driveStick.getY()); //Correct the leftMotor	
 			DriveTrain.leftBackMotor.set(OI.driveStick.getY()); 
-			DriveTrain.rightBackMotor.set(OI.driveStick.getY()); //Correct the leftMotor	
+			DriveTrain.rightBackMotor.set(-OI.driveStick.getY()); //Correct the leftMotor	
 			}
-		*/
+		
 		//Test End
 		
 		//Debug Info*******************************************Debug Info

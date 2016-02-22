@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		armPID.start();
+		//armPID.start();
 		runRoller.start();
 		DriveBot.start();
 		raiseHook.start();
