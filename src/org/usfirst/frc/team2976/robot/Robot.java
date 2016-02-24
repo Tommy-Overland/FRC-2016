@@ -12,12 +12,14 @@ import org.usfirst.frc.team2976.robot.commands.ArmDynamicSetpointPID;
 import org.usfirst.frc.team2976.robot.commands.DriveBOT;
 import org.usfirst.frc.team2976.robot.commands.DriveStraight;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2976.robot.commands.LowBarAutonomous;
 import org.usfirst.frc.team2976.robot.commands.RaiseBackArm;
 import org.usfirst.frc.team2976.robot.commands.RaiseHook;
 import org.usfirst.frc.team2976.robot.commands.RaiseRobot;
 import org.usfirst.frc.team2976.robot.subsystems.Camera;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2976.robot.subsystems.Roller;
 import org.usfirst.frc.team2976.robot.commands.RunRoller;
 import org.usfirst.frc.team2976.robot.commands.TankBot;
 import org.usfirst.frc.team2976.robot.commands.startCompressor;
@@ -31,7 +33,9 @@ import org.usfirst.frc.team2976.robot.commands.startCompressor;
  */
 
 public class Robot extends IterativeRobot {
-		
+
+	SendableChooser autoChooser;
+	
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final ArcadeBot ArcadeBOT = new ArcadeBot();
 	public static final TankBot TankBOT = new TankBot(); // Do not start both
@@ -49,6 +53,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain drivetrain;
+	public static Roller roller;
 	// Btn Commands are started in the OI constructor
 
 	Command autonomousCommand;
@@ -67,12 +72,14 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("Low Bar Autonomous", new LowBarAutonomous());
 	}
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		autonomousCommand = (Command)autoChooser.getSelected();
+        if(autonomousCommand != null) autonomousCommand.start();
 	}
 
 	/**

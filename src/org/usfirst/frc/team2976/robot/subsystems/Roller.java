@@ -18,5 +18,19 @@ public class Roller extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    public void set(double value){
+    	roller.set(value);
+    }
+    public void rollerIn(){
+    	roller.set(1);
+    }
+    
+    public void rollerOut(){
+    	roller.set(-1);
+    }
+    
+    public void rollerStop(){
+    	roller.set(0);
+    }
 }
 
