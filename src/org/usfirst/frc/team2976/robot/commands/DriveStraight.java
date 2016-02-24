@@ -20,10 +20,10 @@ public class DriveStraight extends Command {
 	/** Proportional gain */
 	double kp = 0.005;
 	/** Integral Gain */
-	double ki = 0.001;
+	double ki = 0.00;
 	//double ki = 0.0001;
 	/** Derivative Gain */
-	double kd = 0.004;
+	double kd = 0.00;
 	//double kd = 0.00003
 
 	int robot_angle_setpoint = 0;
