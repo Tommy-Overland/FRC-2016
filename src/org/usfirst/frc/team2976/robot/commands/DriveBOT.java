@@ -4,6 +4,7 @@ package org.usfirst.frc.team2976.robot.commands;
 import org.usfirst.frc.team2976.robot.OI;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //import org.usfirst.frc.team2976.robot.Robot;
 
@@ -25,7 +26,12 @@ public class DriveBOT extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//drivetrain.m_drive.arcadeDrive(OI.LeftJoyStick);
-    	DriveTrain.m_drive.arcadeDrive(-OI.driveStick.getLY(), -OI.driveStick.getRX(),true);
+    	double x = OI.driveStick.getLY();
+    	if(Math.abs(x)<0.2)	{
+    		x=0;
+    	}
+    	DriveTrain.m_drive.arcadeDrive(-x, -OI.driveStick.getRX(),true);
+    	SmartDashboard.putNumber("Throttle", OI.driveStick.getLY());
     	//Reverse to compensate for mixed axis
     }
 

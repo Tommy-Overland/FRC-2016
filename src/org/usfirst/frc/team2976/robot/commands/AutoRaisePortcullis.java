@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *@author NeilHazra
  */
 public class AutoRaisePortcullis extends Command {
-	public final int TICKS_PER_ROTATION = 00;
+	public final int TICKS_PER_ROTATION = 00; 
 	public final int INCHES_PER_ROTATION = 00;
 	final double kp = 0.0;	
 	final double ki = 0.0;	
 	final double kd = 0.0;
 	final int sampleTime = 100; 
+	
+	
 	final int centerValue = 0; //dummyVariable
 	
 	public LeftDriveEncoderPIDSource leftDriveEncoderPIDSource = new LeftDriveEncoderPIDSource();

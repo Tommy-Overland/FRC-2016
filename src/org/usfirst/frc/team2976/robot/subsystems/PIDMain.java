@@ -87,7 +87,12 @@ public class PIDMain {
 	 * PID Algorithm calculates in this TimerTask created by PIDMain
 	 * @author NeilHazra
 	 *
-	 */	
+	 */
+	public void resetPID()	{
+		proportional = 0;
+		integral = 0;
+		derivative = 0;
+	}
 	private class PIDCompute extends TimerTask	{
 		public void run()	{  
 			if(!enabled) {

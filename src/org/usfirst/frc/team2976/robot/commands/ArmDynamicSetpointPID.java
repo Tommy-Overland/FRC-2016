@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2976.robot.commands;
 
 import org.usfirst.frc.team2976.robot.OI;
-import org.usfirst.frc.team2976.robot.subsystems.ArmLimitSwitches;
 import org.usfirst.frc.team2976.robot.subsystems.ArmMotors;
 import org.usfirst.frc.team2976.robot.subsystems.LeftEncoderPIDSource;
 import org.usfirst.frc.team2976.robot.subsystems.PIDMain;
@@ -10,18 +9,23 @@ import org.usfirst.frc.team2976.robot.subsystems.RightEncoderPIDSource;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  */
 public class ArmDynamicSetpointPID extends Command {
 	final int ARM_SPEED_REDUCER = 4;
 	int ArmMinEncoderValue = 0;
-	int ArmMaxEncoderValue = 550;
+	int ArmMaxEncoderValue = 565;
 	
 	final int sampleTime = 100;
 	
 	/** Proportional gain */
-	final double kp = -0.005;	
+	final double kp = 0.005;	
 	/**Integral Gain */
 	final double ki = 0;	
 	
@@ -38,6 +42,10 @@ public class ArmDynamicSetpointPID extends Command {
 	//public static ArmLimitSwitches armSwitch = new ArmLimitSwitches();
 	public PIDMain leftArmDynamicPID = new PIDMain(leftEncoderPIDSource, centerValue, sampleTime, kp, ki, kd);
 	public PIDMain rightArmDynamicPID = new PIDMain(rightEncoderPIDSource, centerValue, sampleTime, kp, ki, kd);
+	
+	File f;
+	BufferedWriter bw;
+	FileWriter fw;
 	
     public ArmDynamicSetpointPID() {
     	requires(armMotors);
@@ -90,16 +98,23 @@ public class ArmDynamicSetpointPID extends Command {
     	ArmMotors.rightArm.set(-rightArmDynamicPID.getOutput());   
  
     	//***	***********Debug Info*******************//
-    	SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));
+    	//SmartDashboard.putNumber("Mapped Setpoint", PIDMain.map(OI.driveStick.getRawAxis(OI.Axis.LY.getAxisNumber()), -1, 1, ArmMinEncoderValue, ArmMaxEncoderValue));
     	SmartDashboard.putNumber("RightInput", rightArmDynamicPID.getInput());
-    	SmartDashboard.putNumber("RightOutput", rightArmDynamicPID.getOutput());
-    	SmartDashboard.putNumber("RightError", rightArmDynamicPID.getError());
-    	SmartDashboard.putNumber("LeftInput", leftArmDynamicPID.getInput());
-    	SmartDashboard.putNumber("LeftOutput", leftArmDynamicPID.getOutput());
-    	SmartDashboard.putNumber("LeftError", leftArmDynamicPID.getError());
-    	SmartDashboard.putNumber("Max", max);
-    	SmartDashboard.putNumber("Min", min);
+    	//SmartDashboard.putNumber("RightOutput", rightArmDynamicPID.getOutput());
+    	//SmartDashboard.putNumber("RightError", rightArmDynamicPID.getError());
+    	//SmartDashboard.putNumber("LeftInput", leftArmDynamicPID.getInput());
+    	//SmartDashboard.putNumber("LeftOutput", leftArmDynamicPID.getOutput());
+    	//SmartDashboard.putNumber("LeftError", leftArmDynamicPID.getError());
+    	//SmartDashboard.putNumber("Max", max);
+    	//SmartDashboard.putNumber("Min", min);
     	//**************Debug Info******************//
+    	/*try	{
+    		f = new File("E://")
+    	} catch(IOException e)  {
+    		
+    	}
+    	*/
+    	
     }
     protected boolean isFinished() {
         return false;

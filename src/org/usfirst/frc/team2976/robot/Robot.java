@@ -5,14 +5,17 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import org.usfirst.frc.team2976.robot.commands.ArcadeBot;
 import org.usfirst.frc.team2976.robot.commands.ArmDynamicSetpointPID;
 import org.usfirst.frc.team2976.robot.commands.DriveBOT;
+import org.usfirst.frc.team2976.robot.commands.DriveStraight;
 import org.usfirst.frc.team2976.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2976.robot.commands.RaiseBackArm;
 import org.usfirst.frc.team2976.robot.commands.RaiseHook;
 import org.usfirst.frc.team2976.robot.commands.RaiseRobot;
+import org.usfirst.frc.team2976.robot.subsystems.Camera;
 import org.usfirst.frc.team2976.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2976.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2976.robot.commands.RunRoller;
@@ -28,7 +31,7 @@ import org.usfirst.frc.team2976.robot.commands.startCompressor;
  */
 
 public class Robot extends IterativeRobot {
-
+		
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final ArcadeBot ArcadeBOT = new ArcadeBot();
 	public static final TankBot TankBOT = new TankBot(); // Do not start both
@@ -40,6 +43,8 @@ public class Robot extends IterativeRobot {
 	public static final DriveBOT DriveBot = new DriveBOT();
 	public static final RaiseBackArm raiseBackArm = new RaiseBackArm();
 	public static final RunRoller runRoller = new RunRoller();
+	SendableChooser chooser;
+	public static Camera camera;
 	// Drive Commands are exclusive
 
 	public static OI oi;
@@ -54,6 +59,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
+		chooser = new SendableChooser();
+		camera = new Camera("cam0");
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
 	}
@@ -78,7 +85,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		//armPID.start();
+		armPID.start();
 		runRoller.start();
 		DriveBot.start();
 		raiseHook.start();

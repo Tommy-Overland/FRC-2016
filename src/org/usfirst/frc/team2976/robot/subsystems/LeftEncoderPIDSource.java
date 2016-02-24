@@ -17,6 +17,6 @@ public class LeftEncoderPIDSource implements PIDSource {
 	@Override
 	public double getInput() {
 		// TODO Auto-generated method stub
-		return encoder.getLeftArmPosition();
+		return -encoder.getLeftArmPosition();
 	}
 }
