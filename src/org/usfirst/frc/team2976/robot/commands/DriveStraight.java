@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveStraight extends Command {
 	DriveTrain driveTrain = new DriveTrain();
-	Command ForcedInterrupted;
 	public GyroPIDSource gyropidsource = new GyroPIDSource(); // Implements
 																// PIDSource
 	/** Proportional gain */
@@ -39,18 +38,7 @@ public class DriveStraight extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		if (Robot.ArcadeBOT.isRunning()) {
-			Robot.ArcadeBOT.cancel(); // Interrupt the regular DriveFuntion
-			ForcedInterrupted = Robot.ArcadeBOT;
-		}
-		if (Robot.TankBOT.isRunning()) {
-			Robot.TankBOT.cancel(); // Interrupt the regular DriveFuntion
-			ForcedInterrupted = Robot.TankBOT;
-		}
-		if (Robot.DriveBot.isRunning()) {
-			Robot.DriveBot.cancel(); // Interrupt the regular DriveFuntion
-			ForcedInterrupted = Robot.DriveBot;
-		}
+		Robot.DriveBot.cancel();
 		RobotAnglePID.isEnabled(true); // Start the PID
 		gyropidsource.reset();
 	}
@@ -101,16 +89,17 @@ public class DriveStraight extends Command {
 	// Called once after isFinished returns true
 	protected void end() {	
 		gyropidsource.reset();
-		RobotAnglePID.resetPID();
+		//RobotAnglePID.resetPID();
 		RobotAnglePID.isEnabled(false);// Terminate the PID loop
-		ForcedInterrupted.start(); // restart the regular drive function
+		Robot.DriveBot.start();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		gyropidsource.reset();
-		RobotAnglePID.resetPID();
+		//RobotAnglePID.resetPID();
 		RobotAnglePID.isEnabled(false);
+		Robot.DriveBot.start();
 	}
 }

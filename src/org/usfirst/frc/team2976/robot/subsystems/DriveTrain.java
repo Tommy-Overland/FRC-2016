@@ -6,7 +6,7 @@ import org.usfirst.frc.team2976.robot.override.TankDrivePlus;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *@author NeilHazra
  */
 public class DriveTrain extends Subsystem {	
 	public static CANTalon rightFrontMotor = new CANTalon(RobotMap.RightFrontDriveMotor); //Talon Object

@@ -15,7 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ *@author NeilHazra
  */
 public class ArmDynamicSetpointPID extends Command {
 	final int ARM_SPEED_REDUCER = 4;

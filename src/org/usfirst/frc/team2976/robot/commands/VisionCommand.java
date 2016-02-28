@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 //import org.usfirst.frc.team2976.robot.Robot;
 
 /**
- *
+ *@author Jasmine Cheng
  */
 public class VisionCommand extends Command {
 	 public int session;

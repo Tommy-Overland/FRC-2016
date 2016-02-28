@@ -9,7 +9,7 @@ import com.ni.vision.NIVision.Image;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *@author NeilHazra
  */
 public class Camera extends Subsystem {
 	 public int session;

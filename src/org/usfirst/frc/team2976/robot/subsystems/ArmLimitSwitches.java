@@ -6,7 +6,7 @@ import org.usfirst.frc.team2976.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 /**
- *
+ *@author NeilHazra
  */
 public class ArmLimitSwitches extends Subsystem {
     public DigitalInput high_switch = new DigitalInput(RobotMap.ArmSwitch);

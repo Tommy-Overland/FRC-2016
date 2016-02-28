@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2976.robot.OI;
 import org.usfirst.frc.team2976.robot.subsystems.HookMotor;
 /**
- *
+ *@author NeilHazra
  */
 public class RaiseHook extends Command {
 	HookMotor hookMotor = new HookMotor();

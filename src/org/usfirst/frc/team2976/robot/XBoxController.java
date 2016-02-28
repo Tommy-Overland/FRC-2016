@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2976.robot;
-
+/**
+ *@author Tommy Overland
+ */
 import edu.wpi.first.wpilibj.Joystick;
 
 public class XBoxController extends Joystick {

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import org.usfirst.frc.team2976.robot.Robot;
 
 /**
- *
+ *@author Jasmine Cheng
  */
 public class DriveBOT extends Command {
 	public static DriveTrain drivetrain = new DriveTrain();

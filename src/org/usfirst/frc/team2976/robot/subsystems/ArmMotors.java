@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *@author NeilHazra
  */
 public class ArmMotors extends Subsystem {
 	public static CANTalon rightArm = new CANTalon(RobotMap.RightArmMotor); //Talon Object

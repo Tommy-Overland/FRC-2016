@@ -44,13 +44,9 @@ public class AutoRaisePortcullis extends Command {
 			Robot.ArcadeBOT.cancel(); // Interrupt the regular DriveFuntion
 			ForcedInterrupted = Robot.ArcadeBOT;
 		}
-		if (Robot.TankBOT.isRunning()) {
-			Robot.TankBOT.cancel(); // Interrupt the regular DriveFuntion
-			ForcedInterrupted = Robot.TankBOT;
-		}
 		if (Robot.DriveBot.isRunning()) {
 			Robot.DriveBot.cancel(); // Interrupt the regular DriveFuntion
-			ForcedInterrupted = Robot.TankBOT;
+			ForcedInterrupted = Robot.DriveBot;
 		}
 		if(!Robot.armPID.isRunning())	{
 			Robot.armPID.start();

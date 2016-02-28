@@ -5,7 +5,7 @@ import org.usfirst.frc.team2976.robot.subsystems.myCompressor;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *@author NeilHazra
  */
 public class startCompressor extends Command {
 	myCompressor compressor = new myCompressor();

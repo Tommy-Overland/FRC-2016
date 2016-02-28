@@ -5,7 +5,11 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.communication.UsageReporting;
 import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tInstances;
 import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tResourceType;
-
+/**
+ * 
+ * @author NeilHazra
+ *
+ */
 public class TankDrivePlus extends RobotDrive {
 
 	public TankDrivePlus(int leftMotorChannel, int rightMotorChannel) {

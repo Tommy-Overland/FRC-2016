@@ -5,7 +5,11 @@ import org.usfirst.frc.team2976.robot.OI;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**
+ * 
+ * @author NeilHazra
+ *
+ */
 public class TankBot extends Command {
 	DriveTrain driveTrain = new DriveTrain();
 	public TankBot() {
