@@ -39,39 +39,29 @@ public class DriveStraight extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.DriveBot.cancel();
-		RobotAnglePID.isEnabled(true); // Start the PID
 		gyropidsource.reset();
+		RobotAnglePID.isEnabled(true); // Start the PID
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {		
-		
-		//DriveTrain.leftFrontMotor.set(-OI.driveStick.getY() - RobotAnglePID.getOutput()); //Correct the rightMotor
-		//DriveTrain.rightFrontMotor.set(OI.driveStick.getY()); //+ RobotAnglePID.getOutput()); //Correct the leftMotor	
-		//DriveTrain.leftBackMotor.set(-OI.driveStick.getY() - RobotAnglePID.getOutput()); //Correct the rightMotor
-		//DriveTrain.rightBackMotor.set(OI.driveStick.getY() /*+ RobotAnglePID.getOutput()*/); //Correct the leftMotor
-		
-		
-		//Test 
-			if(RobotAnglePID.getOutput()<0)	{
-			DriveTrain.leftFrontMotor.set(-OI.driveStick.getY()+ Math.abs(RobotAnglePID.getOutput())); //Correct the rightMotor
+		if (RobotAnglePID.getOutput() < 0) {
+			DriveTrain.leftFrontMotor.set(-OI.driveStick.getY() + Math.abs(RobotAnglePID.getOutput()));
 			DriveTrain.rightFrontMotor.set(OI.driveStick.getY());
-			DriveTrain.leftBackMotor.set(-OI.driveStick.getY()+ Math.abs(RobotAnglePID.getOutput())); //Correct the rightMotor
+			DriveTrain.leftBackMotor.set(-OI.driveStick.getY() + Math.abs(RobotAnglePID.getOutput()));
 			DriveTrain.rightBackMotor.set(OI.driveStick.getY());
-			}	else if(RobotAnglePID.getOutput()>0)	{
-			DriveTrain.leftFrontMotor.set(-OI.driveStick.getY()); 
-			DriveTrain.rightFrontMotor.set(OI.driveStick.getY() - Math.abs(RobotAnglePID.getOutput())); //Correct the leftMotor	
-			DriveTrain.leftBackMotor.set(-OI.driveStick.getY()); 
-			DriveTrain.rightBackMotor.set(OI.driveStick.getY() - Math.abs(RobotAnglePID.getOutput())); //Correct the leftMotor
-			}	else {	
-			DriveTrain.leftFrontMotor.set(-OI.driveStick.getY()); 
-			DriveTrain.rightFrontMotor.set(OI.driveStick.getY()); //Correct the leftMotor	
-			DriveTrain.leftBackMotor.set(-OI.driveStick.getY()); 
-			DriveTrain.rightBackMotor.set(OI.driveStick.getY()); //Correct the leftMotor	
-			}
-		
-		//Test End
-		
+		} else if (RobotAnglePID.getOutput() > 0) {
+			DriveTrain.leftFrontMotor.set(-OI.driveStick.getY());
+			DriveTrain.rightFrontMotor.set(OI.driveStick.getY() - Math.abs(RobotAnglePID.getOutput()));
+			DriveTrain.leftBackMotor.set(-OI.driveStick.getY());
+			DriveTrain.rightBackMotor.set(OI.driveStick.getY() - Math.abs(RobotAnglePID.getOutput()));
+		} else {
+			DriveTrain.leftFrontMotor.set(-OI.driveStick.getY());
+			DriveTrain.rightFrontMotor.set(OI.driveStick.getY());
+			DriveTrain.leftBackMotor.set(-OI.driveStick.getY());
+			DriveTrain.rightBackMotor.set(OI.driveStick.getY());
+		}
+
 		//Debug Info*******************************************Debug Info
 		SmartDashboard.putNumber("DriveStraight: LeftMotorFinal", OI.driveStick.getY() + RobotAnglePID.getOutput());
 		SmartDashboard.putNumber("DriveStraight: RightMotorFinal", OI.driveStick.getY());
@@ -88,17 +78,12 @@ public class DriveStraight extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {	
-		gyropidsource.reset();
-		//RobotAnglePID.resetPID();
-		RobotAnglePID.isEnabled(false);// Terminate the PID loop
-		Robot.DriveBot.start();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		gyropidsource.reset();
-		//RobotAnglePID.resetPID();
 		RobotAnglePID.isEnabled(false);
 		Robot.DriveBot.start();
 	}

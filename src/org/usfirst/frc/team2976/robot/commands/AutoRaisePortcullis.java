@@ -6,6 +6,7 @@ import org.usfirst.frc.team2976.robot.subsystems.LeftDriveEncoderPIDSource;
 import org.usfirst.frc.team2976.robot.subsystems.PIDMain;
 import org.usfirst.frc.team2976.robot.subsystems.RightDriveEncoderPIDSource;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -40,10 +41,6 @@ public class AutoRaisePortcullis extends Command {
 	DriveTrain driveTrain = new DriveTrain();
 	
 	public AutoRaisePortcullis() {
-		if (Robot.ArcadeBOT.isRunning()) {
-			Robot.ArcadeBOT.cancel(); // Interrupt the regular DriveFuntion
-			ForcedInterrupted = Robot.ArcadeBOT;
-		}
 		if (Robot.DriveBot.isRunning()) {
 			Robot.DriveBot.cancel(); // Interrupt the regular DriveFuntion
 			ForcedInterrupted = Robot.DriveBot;
@@ -69,30 +66,26 @@ public class AutoRaisePortcullis extends Command {
     	
     	leftDriveSyncPID.setOutputLimits(min, max);
     	rightDriveSyncPID.setOutputLimits(min, max);
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}		
+    	Timer.delay(.1);
     	angleADeg = Robot.armPID.leftArmDynamicPID.getInput()/TICKS_PER_ROTATION;
 		angleARad = angleADeg*Math.PI/360;
 		
 	}
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		angleBDeg = Robot.armPID.leftArmDynamicPID.getInput()/TICKS_PER_ROTATION;
-		
-		angleBRad = angleBDeg*Math.PI/360;
+		angleBDeg = Robot.armPID.leftArmDynamicPID.getInput() / TICKS_PER_ROTATION;
+
+		angleBRad = angleBDeg * Math.PI / 360;
 
 		forwardDistance = (int) (armLength * (Math.cos(angleBRad) - Math.cos(angleARad)));
-	
-		leftDriveSyncPID.setSetpoint((forwardDistance/INCHES_PER_ROTATION)*TICKS_PER_ROTATION);
-		rightDriveSyncPID.setSetpoint((forwardDistance/INCHES_PER_ROTATION)*TICKS_PER_ROTATION);
-	
-    	DriveTrain.leftBackMotor.set(leftDriveSyncPID.getOutput());
-    	DriveTrain.leftFrontMotor.set(leftDriveSyncPID.getOutput());
-    	DriveTrain.rightBackMotor.set(rightDriveSyncPID.getOutput());
-    	DriveTrain.rightFrontMotor.set(rightDriveSyncPID.getOutput());
+
+		leftDriveSyncPID.setSetpoint((forwardDistance / INCHES_PER_ROTATION) * TICKS_PER_ROTATION);
+		rightDriveSyncPID.setSetpoint((forwardDistance / INCHES_PER_ROTATION) * TICKS_PER_ROTATION);
+
+		DriveTrain.leftBackMotor.set(leftDriveSyncPID.getOutput());
+		DriveTrain.leftFrontMotor.set(leftDriveSyncPID.getOutput());
+		DriveTrain.rightBackMotor.set(rightDriveSyncPID.getOutput());
+		DriveTrain.rightFrontMotor.set(rightDriveSyncPID.getOutput());
 	}
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {

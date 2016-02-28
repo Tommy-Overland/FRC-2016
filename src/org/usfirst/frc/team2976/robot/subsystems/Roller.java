@@ -12,11 +12,25 @@ public class Roller extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public Talon roller = new Talon(RobotMap.rollerMotorID);
+	public static Talon roller = new Talon(RobotMap.rollerMotorID);
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    public void set(double value){
+    	roller.set(value);
+    }
+    public static void rollerIn(){
+    	roller.set(1);
+    }
+    
+    public static void rollerOut(){
+    	roller.set(-1);
+    }
+    
+    public static void rollerStop(){
+    	roller.set(0);
     }
 }
 

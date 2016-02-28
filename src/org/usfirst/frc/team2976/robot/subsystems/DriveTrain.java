@@ -17,9 +17,25 @@ public class DriveTrain extends Subsystem {
 	public static TankDrivePlus m_drive = new TankDrivePlus(leftBackMotor, leftFrontMotor,rightBackMotor, rightBackMotor); //Robot Drive Class
 	
 	public void initDefaultCommand() {
-		//rightFrontMotor.reverseOutput(true);
-		//rightBackMotor.reverseOutput(true);
-		//leftFrontMotor.reverseOutput(true);
-		//leftBackMotor.reverseOutput(true);
+	}	
+	
+	public static void setZero(){
+		rightFrontMotor.set(0);
+		leftFrontMotor.set(0);
+		rightBackMotor.set(0);
+		leftBackMotor.set(0);
 	}
+	public static void Break()	{
+		DriveTrain.leftBackMotor.enableBrakeMode(true);
+		DriveTrain.leftFrontMotor.enableBrakeMode(true);
+		DriveTrain.rightBackMotor.enableBrakeMode(true);
+		DriveTrain.rightFrontMotor.enableBrakeMode(true);
+	}
+	public static void releaseBreak()	{
+		DriveTrain.leftBackMotor.enableBrakeMode(false);
+		DriveTrain.leftFrontMotor.enableBrakeMode(false);
+		DriveTrain.rightBackMotor.enableBrakeMode(false);
+		DriveTrain.rightFrontMotor.enableBrakeMode(false);
+	}
+
 }
